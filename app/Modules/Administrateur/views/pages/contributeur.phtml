@@ -1,0 +1,47 @@
+
+<?php
+
+if (!isset($clients)) {
+    $clients = [];
+}
+?>
+
+    
+    <div class="col-md-12">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nom & Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Oeuvres</th>
+                <th>Nouveaut&eacute;e</th>
+                <th>Infos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($clients as $key => $client) {  ?>
+            <tr>
+                <td><?= $client->nom .' '.$client->prenom ?></td>
+                <td><?= $client->boitePostale.' '.$client->pays->nompays ?></td>
+                <td><?= $client->telephone ?></td>
+                <td><a href="<?= $this->url->get("admin/client/espace?customer=".$client->id) ?>" class="fa fa-eye text-primary"> (<?= sizeof($client->getImagecontributeur(["validite=:val:","bind"=>["val"=>"1"]])) ?>)</a></td>
+                <td><span class="badge bg-green"><?= sizeof($client->getImagecontributeur(["validite=:val:","bind"=>["val"=>"0"]])) ?></span></td>
+                <td><a href="#" class="fa fa-info-circle text-info"></a></td>
+            </tr>
+            <?php } ?>
+           
+        </tbody>
+        <tfoot>
+           <tr>
+                <th>Nom & Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Oeuvres</th>
+                <th>Nouveaut&eacute;e</th>
+                <th>Infos</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+

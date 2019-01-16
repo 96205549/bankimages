@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>AfriqueStock</title>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no"/>
+        <link rel="shortcut icon" href="<?= $this->url->getBaseUri(); ?>public/images/icone/africone.png"></link>
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/admin/custom.min.css">
+        <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/grid.css">
+        <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/style.css">
+        <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/styles.css">
+        <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/search.css">
+
+        <!--login code -->
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/css/util.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/css/main.css">
+        <!--back-end form -->
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/admin/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/admin/bootstrap-progressbar-3.3.4.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/admin/green.css">
+        <!--<link rel="stylesheet" type="text/css" href="<?php// $this->url->getBaseUri(); ?>public/site/css/admin/dropzone.min.css">-->
+        <link rel="stylesheet" type="text/css" href="<?= $this->url->getBaseUri(); ?>public/site/css/admin/dataTables.bootstrap.min.css">
+
+
+        <script src="<?= $this->url->getBaseUri(); ?>public/site/js/jquery.js"></script>
+        <!--<script src="<?php // $this->url->getBaseUri(); ?>public/site/js/jquery-migrate-1.2.1.js"></script>-->
+        <script src="<?= $this->url->getBaseUri(); ?>public/site/css/admin/bootstrap.min.js"></script>
+        <!--<script src="<?php // $this->url->getBaseUri(); ?>public/site/css/admin/dropzone.min.js"></script>-->
+
+
+        <script src='<?= $this->url->getBaseUri(); ?>public/site/js/device.min.js'></script>
+    </head>
+    <body>
+        <div class="page">
+
+            <header>
+                <div id="stuck_container" class="stuck_container">
+                    <div class="container ">
+                        <div class="brandstuck">
+                            <img src="images/logo.png" alt="">
+                            <h1 class="brand_name">
+                                <a href="<?= $this->url->get("") ?>">AfriqueStock</a>
+                            </h1>
+                        </div>
+                        <div class="navmenu">
+                            <nav class="nav">
+                                <ul class="sf-menu" data-type="navbar">
+                                    <li class="active">
+                                        <a href="<?= $this->url->get("") ?>">Home</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="<?= $this->url->get("images/freepicture") ?>">Images</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->url->get("categorie/") ?>">Cat&eacute;gories</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->url->get("abonnement/") ?>">Tarif</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="account">
+                                <?php if (!$this->session->get("id")) { ?>
+                                    <a href="<?= $this->url->get("account/login") ?>" class="lock">Login</a>
+                                    <a href="<?= $this->url->get("account/create") ?>" class="user">Creata an Account</a>
+                                <?php } else { ?>
+                                    <a href="<?= $this->url->get("customer/") ?>" class="user"><?= $this->session->get("nom") . ' ' . $this->session->get("prenom"); ?></a>
+                                    <a href="<?= $this->url->get("account/logout") ?>" class="lock">Logout</a>
+                                <?php } ?>
+                                <?php if (!$this->session->get("contributor")) { ?>
+                                    <a href="<?= $this->url->get("account/contributor") ?>" class="fa fa-plus">&nbsp;&nbsp;Become Contributor</a>
+                                    <?php
+                                }else {
+                                    if ($this->session->get("contributor") == "yes") {
+                                        ?>
+                                        <a href="<?= $this->url->get("contributor/") ?>" class="fa fa-plus">&nbsp;&nbsp;Space Contributor</a>
+                                    <?php }else { ?>
+                                        <a href="<?= $this->url->get("account/validate") ?>" class="fa fa-plus">&nbsp;&nbsp;Space Contributor</a>
+                                    <?php }
+                                }
+                                ?>
+                                <a href="<?= $this->url->get("shopping/cart") ?>" class="shopping">&nbsp;<?= ($panier) ? sizeof($panier) : "0"; ?></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <div class="clearfix"></div>
+            <main>
+            <?= $this->getContent(); ?>
+            </main>
+            <div class="clearfix"></div>
+            <!--========================================================
+                                      FOOTER
+            =========================================================-->
+
+        </div>
+
+        <script src="<?= $this->url->getBaseUri(); ?>public/site/js/scripts.js"></script>
+        <!--<script src="<?= $this->url->getBaseUri(); ?>public/site/js/script.js"></script>-->
+        <!--<script src="<?= $this->url->getBaseUri(); ?>public/site/js/jquery-3.0.0.js"></script>-->
+        <script src="<?= $this->url->getBaseUri(); ?>public/site/css/admin/jquery.dataTables.min.js"></script>
+        <script src="<?= $this->url->getBaseUri(); ?>public/site/css/admin/dataTables.bootstrap.min.js"></script>
+<!--        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-7078796-5']);
+            _gaq.push(['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();</script>
+    </body><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P9FT69');</script>-->
+</html>

@@ -1,0 +1,56 @@
+<?php
+if (!isset($produits)) {
+    $produits = [];
+}
+if (!isset($tailles)) {
+    $tailles = [];
+}
+
+//die(var_dump($tailles));
+?>
+
+<div class="container">
+    <div class="clearfix">&nbsp;</div>
+    <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+        <div class="col-md-12 row notification alert fade in alert-dismissable" >
+            <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+            <p><?php $this->flashSession->output() ?></p>
+        </div>
+    <?php endif; ?>
+    <div class="clearfix">&nbsp;</div>
+
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%">Product</th>
+
+                <th style="width:40%">Download <i class="fa fa-download"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($produits as $key=>$produit): //$tailles[$key]  ?>
+            
+                <?php $image = afriquestock_image::findFirst(['idimg=?0 and taille=?1', "bind"=>['0'=>$produit, '1'=>$tailles[$key]]]); ?>
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $image->imagelink; ?>" alt="..." class="img-responsive"/></div>
+                            <div class="col-sm-10">
+                                <p>Taille: <?= $image->taille ?></p>
+
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="actions" data-th="">
+                        <br>
+                        <a href="<?= $this->url->getBaseUri() . "public/images/photo/" . $image->imagelink ?>" download="<?= $this->url->getBaseUri() . "public/images/photo/" . $image->imagelink ?>"><?= $image->imagelink ?>&nbsp; <i class="fa fa-download"></i></a>								
+                    </td>
+                </tr>
+                <?php
+            endforeach;
+            ?>
+        </tbody>
+
+    </table>
+</div>

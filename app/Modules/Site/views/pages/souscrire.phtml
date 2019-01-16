@@ -1,0 +1,81 @@
+<?php
+
+//if (!isset($packs)) {
+//    $packs = [];
+//}
+?>
+<div class="container abon-titre">
+    <h2 align="center">Choisissez la formule qui vous convient </h2>
+</div>
+
+<!--container abonnement-->   
+<div class="container tarif-abonn">
+
+    <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+        <?php echo $this->flashSession->output() ?>
+        <div class="col-md-12 row notification alert fade in alert-dismissable" >
+            <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+            <p><?php echo $this->flashSession->output() ?></p>
+        </div>
+    <?php endif; ?>
+
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+
+        <table class="table table-responsive">
+            <tr class="table-responsive table-striped" style="background: gainsboro;">
+                <td><b>Formule</b></td>
+                <td><b>Description Formule</b></td>
+                <td><b>Pack</b></td>
+                <td><b>Periode</b></td>
+                <td><b>Montant ($)</b></td>
+                <td><b>Montant (XOF)</b></td>
+            </tr>
+            
+            <tr>
+                <td><?= $pack->formule->libelle; ?></td>
+                <td><?= $pack->formule->description; ?></td>
+                <td><?= $pack->libelle; ?></td>
+                <td><?= $pack->periode->taux; ?></td>
+                <td><?= $pack->prix; ?> $</td>
+                <td><?= ($pack->prix * 550); ?> XOF</td>   
+            </tr>
+            <tr>
+                <td colspan="5">&nbsp;</td>
+                <td>
+                    <?php if($pack->prix >0): ?>
+                    <form action="<?= $this->url->get("abonnement/abonne") ?>" method="POST">
+                        <script
+                            src="https://sandbox-checkout.fedapay.com/js/checkout.js"
+                            data-public-key="pk_sandbox_L835B89pVn0IE8lpZe0Istpj"
+                            data-button-text="Payer: <?= ($pack->prix)*(550); ?> XOF"
+                            data-button-class="button-class btn btn-xs"
+                            data-transaction-amount="<?= ($pack->prix)*(550); ?>"
+                            data-transaction-description="Payement de l'abonnement du pack <?= $pack->libelle; ?>"
+                            data-currency-iso="XOF"
+                            data-widget-description="AfriqueStock 100% africaine"
+                            data-widget-image="https://live-checkout.fedapay.com/img/marketplace.svg"
+                            data-widget-title="AfriqueStock">
+                        </script>
+
+                        <input type="hidden" value="<?= $pack->prix; ?>" name="montant"> 
+                        <input type="hidden" value="<?= $pack->id; ?>" name="pack"> 
+                        
+                    </form>
+                     <?php endif; ?>
+                </td>
+               
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+<!--    <div class="container abon-footer">
+        <p align="center">Besoin D’une Offre Sur-Mesure Pour Votre Équipe Ou Votre Entreprise?</p>
+    </div>-->
+
+    <div class="clearfix">&nbsp;</div>
+</div>

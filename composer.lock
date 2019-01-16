@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "20227ffffda8d45c1cb9661e12459acb",
+    "packages": [
+        {
+            "name": "fedapay/fedapay-php",
+            "version": "0.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fedapay/fedapay-php.git",
+                "reference": "cae9addcfd1ab4016ce9def5ed24673911e207d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fedapay/fedapay-php/zipball/cae9addcfd1ab4016ce9def5ed24673911e207d7",
+                "reference": "cae9addcfd1ab4016ce9def5ed24673911e207d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "^1.7",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FedaPay\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FedaPay and contributors",
+                    "homepage": "https://github.com/fedapay/fedapay-php/contributors"
+                }
+            ],
+            "description": "PHP library for FedaPay https://fedapay.com",
+            "homepage": "https://fedapay.com/",
+            "keywords": [
+                "api",
+                "fedapay",
+                "payment processing"
+            ],
+            "time": "2018-11-20T14:45:08+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

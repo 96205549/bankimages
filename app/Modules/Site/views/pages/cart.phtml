@@ -1,0 +1,61 @@
+<?php
+if (!isset($panier)) {
+    $panier = [];
+}
+$total = 0;
+?>
+<div class="container">
+    <div class="clearfix">&nbsp;</div>
+    <form method="post" action="<?= $this->url->get("shopping/checkout") ?>">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($panier as $achat): ?>
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs"><img src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $achat->images->affiche; ?>" alt="..." class="img-responsive"/></div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">Product 1</h4>
+                                    <p><?= $achat->images->description ?></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price"><?= $achat->totalvente ?></td>
+                        <td data-th="Quantity">
+                            <input type="test" class="form-control text-center" value="1" readonly="yes">
+                        </td>
+                        <td data-th="Subtotal" class="text-center"><?= $achat->totalvente ?></td>
+                        <td class="actions" data-th="">
+                            <!--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>-->
+                            <a href="<?= $this->url->get("shopping/drop?code=".$achat->idpanier.'_'.$achat->idproduit) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+                        </td>
+                    </tr>
+                    <?php $total+=$achat->totalvente;
+                endforeach; ?>
+            </tbody>
+            <tfoot>
+                <tr class="visible-xs">
+                    <td class="text-center"><strong>Total <?= $total ?></strong></td>
+                </tr>
+                <tr>
+                    <td><a href="<?= $this->url->get("images/freepicture") ?>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total <?= $total ?>$</strong></td>
+                    <td>
+                        <button type="submit" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></button> 
+                        <input type="hidden" value="<?= $total ?>" name="total"> 
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+</div>

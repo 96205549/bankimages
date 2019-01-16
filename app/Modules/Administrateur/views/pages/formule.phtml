@@ -1,0 +1,253 @@
+<?php
+if (!isset($types)) {
+    $types = [];
+}
+if (!isset($packs)) {
+    $packs = [];
+}
+if (!isset($periodes)) {
+    $periodes = [];
+}
+if (!isset($clients)) {
+    $clients = [];
+}
+if (!isset($clients)) {
+    $clients = [];
+}
+?>
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestion des abonnements</h4>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-link fa fa-plus-circle" data-toggle="modal" data-target="#exampleModalCenter5">
+                    Creer une formule
+                </button>
+                <div class="clearfix">&nbsp;</div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <form method="post" action="<?= $this->url->get("admin/abonnement/formule") ?>">
+
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Creer une nouvelle formule</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="libelle">Libelle de la formule</label>
+                                        <input type="text" class="form-control" id="libelle" name="libelle" placeholder="Saisissez le libelle de la formule" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description de la formule</label>
+                                        <input type="text" class="form-control" id="description" name="description" placeholder=" Donner la description de la formule" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                    <button type="submit" class="btn btn-primary">Enregistrer </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="clearfix">&nbsp;</div>
+<div class="row">
+    <div class="col-md-12">
+
+
+        <div class="x_content">
+
+            <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                    <thead>
+                        <tr class="headings">
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Num&eacute;rotation </th>
+                            <th class="column-title">Libelle </th>
+                            <th class="column-title">description</th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Nombre selectionné ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php
+                        foreach ($formules as $key => $formule):
+                            ?>
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                </td>
+                                <td scope="row"><?= $key + 1 ?></td>
+                                <td><?= $formule->libelle ?></td>
+                                <td><?= $formule->description ?></td>
+                                <td>
+                                    <a href="<?= $this->url->get("admin/categorie/update?AFID=" . $formule->id); ?>" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                    <a href="<?= $this->url->get("admin/categorie/delete?AFID=" . $formule->id); ?>" class="fa fa-trash text-danger"></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-link fa fa-plus-circle" data-toggle="modal" data-target="#exampleModalCenter">
+                    Creer un pack
+                </button>
+                <div class="clearfix">&nbsp;</div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <form method="post" action="<?= $this->url->get("admin/abonnement/pack") ?>">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Creer un pack</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="libelle">Libelle de la formule</label>
+                                        <input type="text" class="form-control" id="libel" name="libelle" placeholder="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="prix">Prix</label>
+                                        <input type="number" class="form-control" name="prix" id="description" placeholder="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idtype">Type</label>
+                                        <select class="form-control" name="idtype" id="idtype" placeholder="" required>
+                                            <?php foreach ($types as $type): ?>
+                                                <option value="<?= $type->id ?>"><?= $type->libelletype ?></option>
+                                            <?php endforeach; ?>`
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idperiode">Periode</label>
+                                        <select class="form-control" name="idperiode" id="idperiode" placeholder="" required>
+                                            <?php foreach ($periodes as $periode): ?>
+                                                <option value="<?= $periode->id ?>"><?= $periode->taux ?></option>
+                                            <?php endforeach; ?>`
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idformule">Formule</label>
+                                        <select class="form-control" name="idformule" id="idformule" placeholder="" required>
+                                            <?php foreach ($formules as $formule): ?>
+                                                <option value="<?= $formule->id ?>"><?= $formule->libelle ?></option>
+                                            <?php endforeach; ?>`
+                                        </select>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Enregistrer </button>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<div class="clearfix">&nbsp;</div>
+
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="x_content">
+
+            <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                    <thead>
+                        <tr class="headings">
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Num&eacute;rotation </th>
+                            <th class="column-title">Libelle</th>
+                            <th class="column-title">Prix</th>
+                            <th class="column-title">Type</th>
+                            <th class="column-title">Periode</th>
+                            <th class="column-title">Formule</th>
+                            <th class="column-title no-link last">
+                                <span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Nombre selectionné ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php
+                        foreach ($packs as $key => $pack):
+                            ?>
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                </td>
+                                <th scope="row"><?= $key + 1 ?></th>
+                                <td><?= $pack->libelle ?></td>
+                                <td><?= $pack->prix ?></td>
+                                <td><?= $pack->type->libelletype ?></td>
+                                <td><?= $pack->periode->taux ?></td>
+                                <td><?= $pack->formule->libelle ?></td>
+                                <td>
+                                    <a href="<?= $this->url->get("admin/categorie/update?AFID=" . $pack->id); ?>" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                    <a href="<?= $this->url->get("admin/categorie/delete?AFID=" . $pack->id); ?>" class="fa fa-trash text-danger"></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+

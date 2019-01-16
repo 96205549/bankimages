@@ -1,0 +1,51 @@
+ <?php
+ $this->assets->outputCss();
+if (!isset($types)) {
+    $types = [];
+}
+ if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div class="col-md-12 row notification alert fade in alert-dismissable" >
+                <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+                <p><?php $this->flashSession->output() ?></p>
+            </div>
+        <?php endif; ?>
+
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Liste des types d'abonnement</h4>
+
+                <div class="container-fuild">
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>               
+                                <th>Type d'abonnement</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($types as $type): ?>
+                            <tr>                               
+                               <td><?=  $type->libelletype ?></td>
+                               <td><?=  $type->description ?></td>
+                               <td>
+                                   <a href="<?=  $this->url->get("admin/type/update".$type->id); ?>" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                  <a href="<?= $this->url->get("admin/type/delete?AFID=".$type->id); ?>" class="fa fa-trash text-danger"></a>
+                               </td>
+                                
+                            </tr>
+                            <?php endforeach; ?>
+                            
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php $this->assets->outputJs(); ?>

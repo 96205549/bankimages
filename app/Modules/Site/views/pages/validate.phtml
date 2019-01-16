@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="grid_12">
+            <div class="wraper-cnt wow fadeInLeft">
+                <div class="limiter">
+                    <div class="container-login100">
+                        <div class="grid_12 wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                            <form class="login100-form validate-form flex-sb flex-w">
+
+
+                                <p>Bravo! chers  <?= $this->session->get("nom").' '.$this->session->get("prenom"); ?> 
+                                    Veuillez consulter votre boîte e-mail pour valider votre compte.
+                                    Cet e-mail est envoy&eacute; &agrave; : <i class="text-warning"><?= $email ?></i> <a href="<?= $this->url->get("account/resendmail") ?>" class="text-warning" style="color:  #BF00FF">Cliquer ici pour renvoyer </a>
+                                    si vous n'avez reçu le mail de confirmation  </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

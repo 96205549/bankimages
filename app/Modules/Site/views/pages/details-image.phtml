@@ -1,0 +1,313 @@
+<?php
+//$this->assets->outputCss(); 
+if (!isset($image)) {
+    $image = [];
+}
+if (!isset($images)) {
+    $images = [];
+}
+//if (!isset($abonnementG)) {
+//    $abonnementG = [];
+//}
+//if (!isset($abonnementM)) {
+//    $abonnementM = [];
+//}
+//if (!isset($abonnementP)) {
+//    $abonnementP = [];
+//}
+
+//$abonnementG = FALSE;
+//$abonnementM = FALSE;
+//$abonnementP = FALSE;
+
+if (!isset($abonnement)) {
+    $abonnement = [];
+}
+
+
+//die(var_dump($abonnementG));
+?>
+<div class="<?= ($imageInfos->width < 300) ? "container" :"container-fliud" ?>">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1">
+                            <?php if ($imageInfos->width < 300): ?>
+                                <img id="myImg2" src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $imageInfos->signature; ?>" alt="img responsive" height="500" style="width:450px;" class="img-thumbnail" >
+                            <?php else: ?>
+                                <img id="myImg2" src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $imageInfos->signature; ?>" alt="img responsive" height="500" class="img-thumbnail" >
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="myModal" class="modal">
+                    <img class="modal-content" id="img02">
+                </div>
+                <div class="details col-md-push-1 col-md-5">
+                    <h3 class="product-title">Categorie: <?php echo $imageInfos->categorie->nomCategorie; ?></h3>
+                    <div class="rating">
+                        <div class="stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <span class="review-no">41 reviews</span>
+                    </div>
+                    <p class="product-description"><?php echo $imageInfos->description; ?></p>
+                    <!--<div class="clearfix">&nbsp;</div>-->
+                    <div class="row">
+                        
+<!--                        <input type="radio" class="custom-control-input collapsed" data-toggle="collapse" href="#collapseOne" value="g" id="defaultUnchecked" name="f"  >fol
+                        <input type="radio" class="custom-control-input" value="m" id="defaultUnchecked" name="f">fal
+                        <input type="radio" class="custom-control-input" value="p" id="defaultUnchecked" name="f">fel-->
+                        <div class="col-md-6">
+                        <h6 class="price">Obtener cette image pour: <span><?php echo $imageInfos->prixG * 0.65; ?> $ / <s><?= $imageInfos->prixG; ?>$</s> </span></h6> </div>
+                        <div class="col-md-4"><h6 class="price">Avec nos abonnement</h6><a  href="<?= $this->url->get("abonnement/"); ?>" class="btn btn-Commencer" <?= (sizeof($abonnement)>0) ? "style='background:#00CC00;'" :""?>> <?= (sizeof($abonnement)>0) ? "Vous avez un abonnement en cour." :"Abonnez-vous"?> </a></div>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <form method="post" action="<?= $this->url->get("shopping/cart"); ?>">
+                        <div class="row">
+                            <div id="accordion">
+                                <div class="col-md-12">
+                                    <!--<div class="custom-control custom-radio collapsed" data-toggle="collapse" href="#collapseOne">-->
+                                        <input type="radio" class="custom-control-input"  value="grande" id="first" name="taille" <?php if($this->session->get("id")) { if(sizeof($abonnement)>0 && $abonnementG==TRUE){ echo "";}
+                                            else{ echo "disabled='disabled'";}}else{ echo "";} ?> checked>
+                                        <label class="custom-control-label" for="first">  Image taille grande <?php echo $imageInfos->prixG; ?>$ &nbsp;<a class="collapsed"  data-toggle="collapse" href="#collapseOne">voir la dimension</a></label>
+                                    <!--</div>-->
+                                </div>
+                                <div class="col-md-offset-1 col-md-11">
+                                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= $imageG->width; ?> px | </span>&nbsp;
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= (($imageG->width/200)* 20.85); ?> cm </span>
+                                            <br>
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?= $imageG->height; ?> px  | </span>&nbsp;
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?=(($imageG->height/200)* 20.85) ?>  cm</span>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="col-md-12">
+                                    <!--<div class="custom-control custom-radio collapsed" data-toggle="collapse" href="#collapseTwo">-->
+                                        <input type="radio" class="custom-control-input custom-radio collapsed"  href="#collapseTwo" value="moyenne" id="two" name="taille" 
+                                            <?php if($this->session->get("id")) { if(sizeof($abonnement)>0 && $abonnementM==TRUE){ echo "";}
+                                            else{ echo "disabled='disabled'";}}else{ echo "";} ?> >
+                                      
+                                        <label class="custom-control-label" for="two">Image taille moyenne <?php echo $imageInfos->prixM; ?>$ &nbsp;<a class="collapsed"  data-toggle="collapse" href="#collapseTwo">voir la dimension</a></label>
+                                    <!--</div>-->
+                                </div>
+                                <div class="col-md-offset-1 col-md-11">
+                                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= $imageM->width; ?> px | </span>&nbsp;
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= (($imageM->width/200)* 20.85); ?> cm </span>
+                                            <br>
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?= $imageM->height; ?> px  | </span>&nbsp;
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?=(($imageM->height/200)* 20.85) ?>  cm</span>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="col-md-12">
+                                    <!--<div class="custom-control custom-radio collapsed" data-toggle="collapse" href="#collapseThree">-->
+                                        <input type="radio" class="custom-control-input custom-radio collapsed"  href="#collapseThree" value="petite" id="three" name="taille" <?php if($this->session->get("id")) { if(sizeof($abonnement)>0 && $abonnementP==TRUE){ echo "";}
+                                            else{ echo "disabled='disabled'";}}else{ echo "";} ?>>
+                                        <label class="custom-control-label" for="three">Image taille Petite <?php echo $imageInfos->prixP; ?>$ &nbsp;<a class="collapsed"  data-toggle="collapse" href="#collapseThree">voir la dimension</a></label>
+                                    <!--</div>-->
+                                </div>
+                                <div class="col-md-offset-1 col-md-11">
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= $image->width; ?> px | </span>&nbsp;
+                                            <span class="text-primary">width:</span>
+                                            <span class=""><?= (($image->width/200)* 20.85); ?> </span>
+                                            <br>
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?= $image->height; ?> px  | </span>&nbsp;
+                                            <span class="text-primary">height:</span>
+                                            <span class=""><?=(($image->height/200)* 20.85) ?> cm</span>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  
+                        </div>
+                        <div>&nbsp;</div>
+
+
+                        <span class="row col-md-12">
+                            <span class="col-md-6">
+                                <button  type="submit"  class="btn btn-default text-primary fa fa-download">&nbsp;T&eacute;l&eacute;charger&nbsp;</button>
+<!--                                <a href="<?php // $this->url->get("shopping/cart?id=" . $imageInfos->imageID)       ?>" target="_blank" class="btn btn-default text-primary">&nbsp;T&eacute;l&eacute;charger&nbsp;<i class="fa fa-shopping-cart text-success"></i></a>-->
+                                <input type="hidden" name="produitId" value="<?= $imageInfos->idimage ?>">
+                            </span>&nbsp;
+                            <span class="col-md-push-2 col-md-4">
+                                <button  type="submit" class="btn btn-default text-primary">&nbsp;<i class="fa fa-shopping-cart text-success"></i> Ajouter au panier&nbsp;</button>
+                                <!--<input type="hidden" name="produitId" value="<?php // $image->idimg        ?>">-->
+                            </span>
+                        </span>
+                    </form>
+                  
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="row">
+                        <h6>N° :<strong> <?= $imageInfos->imageID ?></strong></h6>
+                        <h6>Photographe:<strong><?= $imageInfos->client->nom . ' ' . $imageInfos->client->prenom ?></strong></h6>
+                        <div class="clearfix">&nbsp;</div>
+                        <h5><strong>AUTAURISATION D'AUTEUR</strong></h5>
+                        <p>L'autoriations d'auteur est un document juridique signé par acteur d'une photographie, ceci vous accorde la permission de publier; distribuer; et d'utiliser sa     ressemblances à travers la photographie sous une forme ou une autre</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12"><h5 class="text-warning">Mot cl&eacute;</h5></div>
+    <?php   $keywords = explode(",", $imageInfos->motcle); ?>
+    <div class="col-md-12">
+        <?php
+        foreach ($keywords as $key => $keyword):
+            if ($key > 0):
+                ?>
+                <a href=" <?= $this->url->get("images/search?s=" . $keyword) ?>" class="badge badge-light text-small "> <?= $keyword; ?> </a>&nbsp;
+                <?php
+            endif;
+        endforeach;
+        ?>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+</div>
+<div class="clearfix">&nbsp;</div>
+
+
+
+
+<div class="main-container" data-viewManager data-pagination data-lightboxes-modal  data-accountsform data-validation >
+    <div class="body-content" >
+
+        <input id="shouldShowOverlayExperiment" value="false" type="hidden" />
+        <input id="shouldShowModalExperiment" value="false" type="hidden" />
+        <input id="isFiniteScrollEnabled" value="false" type="hidden" />
+
+
+        <div class="search-results container search-common js_search_results ">
+
+            <input type="hidden" data-identifier="search-options-string" value="{&quot;searchterm&quot;:&quot;femme&quot;,&quot;image_type&quot;:&quot;all&quot;,&quot;search_source&quot;:&quot;base_search_form&quot;,&quot;language&quot;:&quot;fr&quot;}" />
+
+
+            <div class="search-content">
+                <ul class="search-results-grid js_search-results-grid mosaic-grid js_mosaic js_responsive">
+
+
+                    <?php
+                    ///die(print_r($keyword[2]));
+                    $images = images::find(["motcle like :val: and idimage!=:0: limit 100", "bind" => ["0" => $imageInfos->idimage, "val" => "%" . $keywords[1] . "%"]]);
+
+                    foreach ($images as $image):
+                        ?>
+
+                        <li class="li js_item" data-width="450" data-height="318" data-aspect="<?= $image->width / $image->height ?>">
+                            <div class="img-wrap">
+                                <img src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $image->affiche; ?>" alt="Beautiful african american girl with an afro hairstyle smiling" width="390" height="280">
+                            </div>
+
+                            <div class="overlay">
+                                <a href="<?= $this->url->get("images/details?id=" . $image->idimage); ?>" class="js_related-item a" data-current-order-index=""  data-track="click.searchResults.image-1-720115051" >
+                                    <div class="data-track"  data-track="click.searchResults.image" >
+<!--                                        <div class="description">
+                                            Beautiful african american girl with an afro hairstyle smiling
+                                        </div>-->
+                                    </div>
+                                </a>
+
+                                <div class="actions js_actions">
+<!--                                    <div class="actions-row">
+                                        <button
+                                            data-href="/fr/editor/image/720115051"
+                                            rel="nofollow"
+                                            target="_blank"
+                                            data-track="click.searchResults.openEditor"
+
+                                            class="btn btn-icon editor-icon-link i-editor i-toggle"
+                                            data-title="Ouvrir dans l'Éditeur"
+                                            >
+                                            <i class="sstk-icon icon-system-editor"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="actions-row">
+
+                                        <button data-href="/g/contributor/999518?searchterm=femme"
+                                                class="btn btn-icon i-more-artist i-toggle"
+                                                data-title="Voir d’autres éléments de cet artiste"
+                                                data-track="click.searchResults.moreFromArtist"
+                                                >
+                                            <i class="sstk-icon icon-artist"></i>
+                                        </button>
+                                    </div>-->
+
+                                    <div class="actions-row">
+
+                                        <button data-href="/fr/search/similar/720115051"
+                                                class="btn btn-icon i-similar i-toggle"
+
+                                                data-title="Voir les images similaires"
+
+                                                data-track="click.searchResults.searchSimilar"
+                                                >
+                                            <i class="sstk-icon icon-similar"></i>
+                                        </button>
+                                    </div>
+                                    <div class="actions-row">
+                                        <button class="btn btn-icon i-lightbox js_lightbox_add"
+                                                data-id="720115051"
+                                                data-title="Enregistrer dans une collection"
+                                                data-lightboximageid="720115051"
+                                                data-toggle="modal"
+                                                data-target=".lightbox-modal"
+                                                data-track="click.searchResults.saveToLightboxModal"
+                                                >
+                                            <i class="sstk-icon icon-plus-sign"></i>
+                                        </button><button class="btn btn-icon i-menu">
+                                            <i class="sstk-icon icon-more"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <?php
+                    endforeach;
+                    ?>
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>

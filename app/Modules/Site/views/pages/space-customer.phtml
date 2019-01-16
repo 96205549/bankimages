@@ -1,0 +1,312 @@
+<?php
+if (!isset($images)) {
+    $images = [];
+}
+if (!isset($categories)) {
+    $categories = [];
+}
+
+if (!isset($ventes)) {
+    $ventes = [];
+}
+if (!isset($favories)) {
+    $favories = [];
+}
+?>
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+    <div class="clearfix"></div>
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><i class="fa fa-bars"></i> Espace Client de <small><?= $this->session->get("nom") . ' ' . $this->session->get("prenom") ?></small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix">&nbsp;</div>
+
+            <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+                <?php echo $this->flashSession->output() ?>
+                <div class="col-md-12 row notification alert fade in alert-dismissable" >
+                    <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+                    <p><?php echo $this->flashSession->output() ?></p>
+                </div>
+            <?php endif; ?>
+            <div class="clearfix">&nbsp;</div>
+            <div class="x_content">
+                
+                <div class="grid_3">
+                    <!-- required for floating -->
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#profile" data-toggle="tab">Mon profil <span class="label label-default"></span> </a>
+                        </li>
+                        <li><a href="#enattente" data-toggle="tab"> Mes achats <span class="label label-warning"><?= sizeof($ventes) ?></span></a>
+                        </li>
+                        <li><a href="#valide" data-toggle="tab">Mes favories <span class="label label-success"><?php // sizeof($valides) ?></span></a>
+                        </li>
+                        <!--<li><a href="#rejete" data-toggle="tab">Mon compte  <span class="label label-danger"><?php // sizeof($rejetes)   ?></span></a>-->
+                        </li>
+                        <!--<li><a href="#vente" data-toggle="tab">Images Vendues  <span class="label label-info"><?php // sizeof($ventes)      ?></span></a>-->
+                        <li><a href="#gallery" data-toggle="tab">Mes abonnements</a>
+                        </li>
+                        <li><a href="#facture" data-toggle="tab">Mes Factures</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid_9">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="clearfix">&nbsp;</div>
+                        <!--bloc d'affichages des images envoye par le contributeur-->
+                        <div class="tab-pane active" id="profile">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!--<div class="clearfix"></div>-->
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <form method="post" action="<?= $this->url->get("customer/profile") ?>">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Nom </label>
+                                                            <input type="text" class="form-control" value="<?= $client->nom ?>" name="nom" id="formGroupExampleInput" placeholder="Nom" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput2">Prenom </label>
+                                                            <input type="text" class="form-control" value="<?= $client->prenom ?>" name="prenom" id="formGroupExampleInput2" placeholder="Prenom" required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Email </label>
+                                                            <input type="email" class="form-control" value="<?= $client->email ?>" name="email" id="formGroupExampleInput" placeholder="Email" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput2">statut </label>
+                                                            <input type="text" disabled="" value="<?= ($client->statut == 1) ? "Activé" : "Non activé"; ?>" class="form-control" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-10">&nbsp;</div>
+                                                            <div class="col-md-2"> 
+                                                                <button type="submit" class="btn btn-success fa fa-check"> Valider</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="col-md-12">
+                                                    <h3>Changer Mot de passe </h3>
+                                                </div>
+                                                <form method="post" action="<?= $this->url->get("customer/changpass") ?>">
+                                                    <div class="col-md-6">
+                                                        <!--                                                        <div class="form-group">
+                                                                                                                    <label for="formGroupExampleInput">Ancien mot de passe </label>
+                                                                                                                    <input type="text" class="form-control" name="oldpass" id="formGroupExampleInput" placeholder="Ancien mot de passe " required="">
+                                                                                                                </div>-->
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput2">Nouveau Mot de passe </label>
+                                                            <input type="text" class="form-control" name="newpass" id="formGroupExampleInput2" placeholder="Nouveau Mot de passe" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput2">Confirmer mot de passe</label>
+                                                            <input type="text" class="form-control" name="confirm" id="formGroupExampleInput2" placeholder="Confirmer mot de passe" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-10">&nbsp;</div>
+                                                            <div class="col-md-2"> 
+                                                                <button type="submit" class="btn btn-success fa fa-check"> Valider</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="enattente">
+
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Description</th>
+<!--                                        <th>mot cle</th>-->
+                                        <th>categorie</th>
+                                        <th>Taille</th>
+                                        <th>Date</th>
+                                        <th>Telecharger <i class="fa fa-download"></i> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($ventes as $vente): 
+                                        $image = afriquestock_image::findFirst(['idimg=?0 and taille=?1', "bind"=>['0'=>$vente->idproduit, '1'=>$vente->taille]]);
+                                        ?>
+                                        <tr>
+                                            <td><img  src="<?= $this->url->getBaseUri(); ?>public/images/photo/<?= $vente->images->affiche; ?>" class="img img-responsive" width="40" height="40"></td>
+                                            <td><?= $vente->images->description; ?></td>
+                                            <td><?= $image->categorie->nomCategorie; ?></td>
+                                            <td><?= $vente->taille; ?></td>
+                                            <td><?= $vente->date; ?></td>
+                                            <td align="center"><a href="<?= $this->url->getBaseUri(); ?>public/images/photo/<?= $image->imagelink; ?>" download="<?= $image->taille.'_image'.$image->imagelink ?>"><i class="fa fa-download"></i></a></td>
+
+                                        </tr>
+                                    <?php endforeach; ?>
+
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+                        <div class="tab-pane" id="valide">
+
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>description</th>
+                                        <th>mot cle</th>
+                                        <th>categorie</th>
+                                        <th>date</th>
+                                        <th>statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($favories as $valide): ?>
+                                        <tr>
+                                            <td><img  src="<?= $this->url->getBaseUri(); ?>public/<?= $valide->image; ?>" class="img img-responsive" width="40" height="40"></td>
+                                            <td><?= $valide->description; ?></td>
+                                            <td><?= $valide->motcle; ?></td>
+                                            <td><?= $valide->categorie->nomCategorie; ?></td>
+                                            <td><?= $valide->date; ?></td>
+                                            <td>Valid&eacute;</td>
+
+                                        </tr>
+                                    <?php endforeach; ?>
+
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+
+                        <!--bloc d'affichage des images vendu-->
+                        <div class="tab-pane" id="vente">
+                            <div class="col-md-12">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>R&eacute;f&eacute;rence</th>
+                                            <th>Image</th>
+                                            <th>Photographe</th>
+                                            <th>prix</th>
+                                            <th>date</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($ventes as $vente): ?>
+                                            <tr>
+                                                <td><?= $vente->images->imageID; ?></td>
+                                                <td><img src="<?= $this->url->getBaseUri(); ?>public/images/photo/<?= $vente->images->affiche; ?>" class="img img-responsive" width="40" height="40"></td>
+                                                <td><?= $vente->client->nom . ' ' . $vente->client->prenom; ?></td>
+                                                <td><?= $vente->prix ?></td>
+                                                <td><?= $vente->date ?></td>  
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="gallery">
+                            <div class="col-md-12">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Formule</th>
+                                            <th>Pack</th>
+                                            <th>Date d&apos;abonnement</th>
+                                            <th>Date Expiration</th>
+                                            <th>Type d&apos;image</th>
+                                            <th>Montant</th>
+                                            <th>Statut</th>
+                                
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($abonnements as $abonnement):
+                                           
+                                            ?>
+                                        <tr>
+                                            <td><?= $abonnement->pack->formule->libelle ?></td>
+                                            <td><?= $abonnement->pack->libelle ?></td>
+                                            <td><?= $abonnement->datedeb ?></td>
+                                            <td><?= $abonnement->datefin ?></td>
+                                            <td><?= $abonnement->type->libelletype ?></td>
+                                            <td><?= $abonnement->pack->prix ?> $</td>
+                                            <td><?= ($abonnement->datefin > date("Y-m-d H:i:s")) ? "<i class='btn btn-success btn-sm'>Valide</i>" : "<i class='btn btn-danger btn-sm'>non valide</i>" ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Formule</th>
+                                            <th>Pack</th>
+                                            <th>Date d&apos;abonnement</th>
+                                            <th>Date Expiration</th>
+                                            <th>Type d&apos;image</th>
+                                            <th>Montant</th>
+                                            <th>Statut</th>
+                                
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="facture">facture Tab.</div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

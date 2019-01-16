@@ -1,0 +1,45 @@
+<?php 
+  $this->assets->outputCss(); 
+  if (!isset($packs)) {
+    $packs = [];
+}
+?>
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestion des packs</h4>
+
+                
+                    <div>&nbsp;</div>
+                     <div class="col-md-12">
+                    <form role="form" method="post" action="<?php $this->url->get("admin/pack/newPack") ?>">
+                                 <div class="col-xs-12">
+                                    <div class="row">
+                                        <h4 class="card-title text-warning text-center">Ajouter le pack</h4>
+                                    </div>
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="libelle">Libelle du pack<span class="kv-reqd">*</span></label>
+                                                        <input type="text" class="form-control" name="libelle" required>
+                                                    </div>
+                                                </div>
+                                            
+                                           
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-info btn-sm pull-right" type="submit" >Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+<?php $this->assets->outputJs(); 
+

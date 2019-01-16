@@ -1,0 +1,175 @@
+
+<?php
+if (!isset($clients)) {
+    $clients = [];
+}
+
+if (!isset($pays)) {
+    $pays = [];
+}
+
+?>
+<div class="clearfix"></div>
+<div class="col-md-12">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-plus"></i>&nbsp; Ajouter un photographe
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="<?php $this->url->get("admin/client/photographe") ?>">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cr&eacute;ation d'un photographe </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-sm-8 col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="nom">Nom:<span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control form-group-lg" name="nom" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="prenom">Prenom <span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control" name="prenom" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Mail<span class="kv-reqd">*</span></label>
+                                            <input type="email" class="form-control" name="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="telephone">Telephone:<span class="kv-reqd">*</span></label>
+                                            <input type="tel" class="form-control" name="telephone" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="idpays">Pays:<span class="kv-reqd">*</span></label>
+                                            <select  class="form-control" name="idpays" required>
+                                                <?php foreach ($pays as $pay) { ?>
+                                                    <option value="<?= $pay->id ?>"><?= $pay->nompays ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ville">Ville:<span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control" name="ville" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="region">Region:<span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control" name="region" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="boitePostale">Boite postale:<span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control" name="boitePostale" required>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label for="statut">Statut:<span class="kv-reqd">*</span></label>
+                                                                                <input type="text" class="form-control" name="statut" required>
+                                                                            </div>
+                                                                        </div>-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="type">Type:<span class="kv-reqd">*</span></label>
+                                            <select  class="form-control" name="type" required>
+                                                <option>photographe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="password">Mot de pass:<span class="kv-reqd">*</span></label>
+                                            <input type="password" class="form-control" name="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="passwordconf">Confirmer le mot de pass:<span class="kv-reqd">*</span></label>
+                                            <input type="password" class="form-control" name="passwordconf" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="col-md-12">
+    <div class="col-md-12">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nom & Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Oeuvres</th>
+                <th>Nouveaut&eacute;e</th>
+                <th>Infos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($clients as $key => $client) {  ?>
+            <tr>
+                <td><?= $client->nom .' '.$client->prenom ?></td>
+                <td><?= $client->boitePostale.' '.$client->pays->nompays ?></td>
+                <td><?= $client->telephone ?></td>
+                <td><a href="<?= $this->url->get("admin/client/espace?customer=".$client->id) ?>" class="fa fa-eye text-primary"> (<?= sizeof($client->getImagecontributeur(["validite=:val:","bind"=>["val"=>"1"]])) ?>)</a></td>
+                <td><span class="badge bg-green"><?= sizeof($client->getImagecontributeur(["validite=:val:","bind"=>["val"=>"0"]])) ?></span></td>
+                <td><a href="#" class="fa fa-info-circle text-info"></a></td>
+            </tr>
+            <?php } ?>
+           
+        </tbody>
+        <tfoot>
+           <tr>
+                <th>Nom & Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Oeuvres</th>
+                <th>Nouveaut&eacute;e</th>
+                <th>Infos</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+
+
+</div>
+

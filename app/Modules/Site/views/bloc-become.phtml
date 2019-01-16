@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+$categories = categorie::find([
+            "order" => "nomCategorie DESC",
+            "limit" => 12
+        ]);
+$linkcat1 = categorie::find([
+            "order" => "nomCategorie DESC",
+            "limit" => 6
+        ]);
+$linkcat2 = categorie::find([
+            "order" => "nomCategorie DESC",
+            "limit" => 6, 12
+        ]);
+$linkcat3 = categorie::find([
+            "order" => "nomCategorie DESC",
+            "limit" => 12, 18
+        ]);
+$linkcat4 = categorie::find([
+            "order" => "nomCategorie DESC",
+            "limit" => 18, 24
+        ]);
+$banner = images::find(["width >:val:", "bind" => ["val" => 400]]);
+//die(var_dump($banner[2]->affiche));
+?>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+    <head>
+        <!--<link href="public/site/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>-->
+        <meta charset="utf-8">
+            <meta name="format-detection" content="telephone=no"/>
+            <link rel="shortcut icon" href="<?= $this->url->getBaseUri(); ?>public/images/icone/africone.png"></link>
+            <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/grid.css">
+                <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/style.css">
+                    <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/site/css/search.css">
+                        <script src="<?= $this->url->getBaseUri(); ?>public/site/js/jquery.js"></script>
+                        <script src="<?= $this->url->getBaseUri(); ?>public/site/js/jquery-migrate-1.2.1.js"></script>
+                        <script src='<?= $this->url->getBaseUri(); ?>public/site/js/device.min.js'></script>
+                        <title>AfriqueStock</title>
+                        </head>
+
+                        <body>
+                            <div class="page">
+                                <!--========================================================
+                                                          HEADER
+                                =========================================================-->
+                                <header style="background-image: url(/afriqueStokn/public/images/ban4.jpg); width: auto; height: 450px; background-image: no-repeat;">
+                                    <div id="stuck_container" class="stuck_container">
+                                        <div class="container ">
+                                            <div class="brandstuck">
+                                                <img src="images/logo.png" alt="">
+                                                    <h1 class="brand_name">
+                                                        <a href="<?= $this->url->get("") ?>">AfriqueStock</a>
+                                                    </h1>
+                                            </div>
+                                            <div class="navmenu">
+                                                <nav class="nav">
+                                                    <ul class="sf-menu" data-type="navbar">
+                                                        <li class="active">
+                                                            <a href="<?= $this->url->get("") ?>">Home</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="<?= $this->url->get("images/freepicture") ?>">Images</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?= $this->url->get("categorie/") ?>">Cat&eacute;gories</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?= $this->url->get("abonnement/") ?>">Tarif</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="account">
+                                                    <?php if (!$this->session->get("id")) { ?>
+                                                        <a href="<?= $this->url->get("account/login") ?>" class="lock">Login</a>
+                                                        <a href="<?= $this->url->get("account/create") ?>" class="user">Creata an Account</a>
+                                                    <?php } else { ?>
+                                                        <a href="#" class="user"><?= $this->session->get("nom") . ' ' . $this->session->get("prenom"); ?></a>
+                                                        <a href="<?= $this->url->get("account/logout") ?>" class="lock">Logout</a>
+                                                    <?php } ?>
+                                                    <?php if (!$this->session->get("contributor")) { ?>
+                                                        <a href="<?= $this->url->get("account/contributor") ?>" class="fa fa-plus">&nbsp;&nbsp;Become Contributor</a>
+                                                        <?php
+                                                    } else {
+                                                        if ($this->session->get("contributor") == "yes") {
+                                                            ?>
+                                                            <a href="<?= $this->url->get("contributor/") ?>" class="fa fa-plus">&nbsp;&nbsp;Space Contributor</a>
+                                                        <?php } else { ?>
+                                                            <a href="<?= $this->url->get("account/validate") ?>" class="fa fa-plus">&nbsp;&nbsp;Space Contributor</a>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <a href="<?= $this->url->get("shopping/cart") ?>" class="shopping">&nbsp;<?= ($panier) ? sizeof($panier) : "0"; ?></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container hdrcnt">
+
+                                        <h1 style="font-size:38px;">Partagez votre travail et commencez à gagner de l’argent.</h1>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <p>Rejoignez notre communauté de contributeur et gagnez de l’argent en faisant ce que vous aimez.</p>
+                                        <div class="carousel-item active">
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <!--<div class="clearfix">&nbsp; </div>-->
+                                <div class="row">
+                                    <main>
+                                        <?= $this->getContent(); ?>
+                                    </main>
+
+
+                                </div>
+                                <div class="clearfix">&nbsp; </div>
+
+                               
+
+                                <!--========================================================
+                                                          FOOTER
+                                =========================================================-->
+                                <footer>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="grid_3 wow fadeInLeft">
+                                                <h4>
+                                                    A propos de nous?
+                                                </h4>
+                                                <p>
+                                                    Afriquestock est un microstock 100% africain qui relie les artistes (photographes, graphistes, vidéastes) de l'afrique et les acquéreurs d'images du monde entier, c'est une plateforme purement africaine qui permet un rapprochement très facile entre le consommateur final et le vendeur. Nous vous proposons différents forfaits abordable et economique qui repond à votre budget.
+                                                </p>
+
+                                            </div>
+                                            <div class="grid_3 wow fadeInUp">
+                                                <h4>
+                                                    Nos partenaires
+                                                </h4>
+                                                <article class="post">
+                                                    <img class="box_aside" width="70"  src="<?= $this->url->getBaseUri(); ?>public/site/images/electra.png" alt="">
+                                                        <div class="box_cnt__no-flow">
+                                                            <i class="fa fa-bank" style="color: #ad72ad;"> Electra</i>
+                                                            <p><a href="#" style="font-size: 11px; color: gainsboro;">
+                                                                    Electra est un système de marketing digitale destiné aux petites et moyennes entreprises afin d'assurer un média professionnelle à fort impact pour une animation ciblée et performante.
+                                                                </a></p>
+                                                        </div>
+                                                </article>
+                                                <article class="post">
+                                                    <img class="box_aside" src="<?= $this->url->getBaseUri(); ?>public/site/images/africashion.jpg" alt="" width="70">
+                                                        <div class="box_cnt__no-flow">
+                                                            <i class="fa fa-bank" style="color: #ad72ad;"> Africashion</i>
+                                                            <p><a href="#" style="font-size: 11px; color: gainsboro;">
+                                                                    afriCAshion et une plateforme ethnique de mode, de conseils , de découvertes, d'art et culture, et de bien-être.
+                                                                </a></p>
+                                                        </div>
+                                                </article>
+                                                <article class="post">
+                                                    <img class="box_aside" width="70" src="<?= $this->url->getBaseUri(); ?>public/site/images/logo-vlisco.jpg" alt="">
+                                                        <div class="box_cnt__no-flow">
+                                                            <i class="fa fa-bank" style="color: #ad72ad;"> VLISCO</i>
+                                                            <p><a href="#" style="font-size: 11px; color: gainsboro;">
+                                                                    Vlisco est une entreprise textile hollandaise connue pour ses marques d’étoffes imprimées wax et Java. 
+                                                                </a></p>
+                                                        </div>
+                                                </article>
+                                            </div>
+                                            <div class="grid_3 wow fadeInUp">
+                                                <h4>
+                                                    Nos contacts
+                                                </h4>
+                                                <article class="post">
+                                                    
+                                                    <img  class="box_aside" src="<?= $this->url->getBaseUri(); ?>public/site/images/bj.png" alt="" width="40">
+                                                   
+                                                    <div class="box_cnt__no-flow">
+                                      
+                                                        <p><span class="grid_2" style="color: gainsboro; font-size: 11px;">
+                                                                (+229) 96509364 <br/>
+                                                                (+229) 96205549 <br/>
+                                                                (+229) 94748280 <br/>
+                                                            </span></p>
+                                                    </div>
+                                                </article>
+
+
+                                            </div>
+                                     
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="container">
+                                        <div class="subfoot">
+                                            <p class="copyright">Image bank  © <span id="copyright-year">2018 <?= (date("Y")!= "2018")? '- '.date("Y"): "" ?></span>.
+                                                <a href="http://www.twicejoetech.com" target="_blank"> Design par TJ-TECH</a></p>
+                                            <ul class="inline-list">
+                                                <li><a href="https://facebook.com/Afriquestock-1886380705002310/?ref=bookmarks" target="_blanc" class="fa fa-facebook"></a></li>
+                                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                                <li><a href="#" class="fa fa-skype"></a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- {%FOOTER_LINK} -->
+                                    </div>
+                                </footer>
+                            </div>
+
+                            <script src="<?= $this->url->getBaseUri(); ?>public/site/js/script.js"></script>
+                            <script src="<?= $this->url->getBaseUri(); ?>public/site/js/"></script>
+<!--                            <script type="text/javascript">
+                                var _gaq = _gaq || [];
+                                _gaq.push(['_setAccount', 'UA-7078796-5']);
+                                _gaq.push(['_trackPageview']);
+                                (function () {
+                                    var ga = document.createElement('script');
+                                    ga.type = 'text/javascript';
+                                    ga.async = true;
+                                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                                    var s = document.getElementsByTagName('script')[0];
+                                    s.parentNode.insertBefore(ga, s);
+                                })();</script>-->
+                        </body><!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function (w, d, s, l, i) {
+                                w[l] = w[l] || [];
+                                w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+                                var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                                j.async = true;
+                                j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                                f.parentNode.insertBefore(j, f);
+                            })(window, document, 'script', 'dataLayer', 'GTM-P9FT69');</script><!-- End Google Tag Manager -->
+                        </html>

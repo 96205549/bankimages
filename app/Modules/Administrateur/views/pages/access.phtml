@@ -1,0 +1,59 @@
+<?php
+$this->assets->outputCss();
+
+if (!isset($access)) {
+    $access = [];
+}
+
+?>
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <h4 class="card-title">Gestions des acc&egrave;s</h4>
+        <!--div class="card">
+            <div class="card-body"-->
+        <form method="post" action="<?php $this->url->get("admin/parametre/access"); ?>">
+            <div class="row">
+                <table class="table table-bordered table-definition mb-5">
+                    <thead class="table-warning ">
+                        <tr>
+                            <th></th>
+                            <th>Description du droit</th>
+                            <th>Mot cl&eacute;</th>
+                            <th>Actif</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($access as $key => $value) {
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" <?= ($value->statut == 1) ? "checked='checked'" : " "; ?> name="access[]" value="<?= $value->id ?>">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                                <td><?= $value->description ?></td>
+                                <td><?= $value->keyword ?></td>
+                                <td><?= ($value->statut == 1) ? "oui" : "non"; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th colspan="4">
+                                <button class="btn btn-primary float-right">Enregistrer</button>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </form>
+        <!--/div>
+    </div-->
+    </div>
+
+</section>
+<?php $this->assets->outputJs(); ?>

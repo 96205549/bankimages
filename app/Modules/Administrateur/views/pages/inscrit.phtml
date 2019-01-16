@@ -1,0 +1,56 @@
+<?php
+$this->assets->outputCss();
+if (!isset($abonnes)) {
+    $abonnes = [];
+}
+
+?>
+<section class="wrapper">
+
+    <div id="accordion">
+        
+        <!--div class="clearfix">&nbsp;</div-->
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div class="col-md-12 row notification alert fade in alert-dismissable" >
+                <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+                <p><?php $this->flashSession->output() ?></p>
+            </div>
+        <?php endif; ?>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom </th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Date inscription</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($abonnes as $key => $abonne):
+                            ?>
+                            <tr>
+                                <th scope="row"><?=  $key + 1 ?></th>
+                                <td><?= $abonne->nom ?></td>
+                                <td><?= $abonne->prenom; ?></td>
+                                <td><?= $abonne->email; ?></td>
+                                <td><?= $abonne->dateat ?></td>
+                                <td>
+                                    <!--a href="#" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                    <a href="#" class="fa fa-trash text-danger"></a-->
+                                </td>
+                            </tr>
+                        <?php  endforeach; ?>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>

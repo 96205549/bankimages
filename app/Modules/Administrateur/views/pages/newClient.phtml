@@ -1,0 +1,87 @@
+<?php 
+  $this->assets->outputCss(); 
+  if (!isset($clients)) {
+    $clients = [];
+}
+?>
+<section class="wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestions des clients</h4>
+
+                
+                    <div>&nbsp;</div>
+                    <form role="form" method="post" action="<?php $this->url->get("admin/client/newClient") ?>">
+                        
+                            <div class="col-md-12">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <h4 class="card-title text-warning text-center">Ajouter le client</h4>
+                                    </div>
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="nom">Nom du client<span class="kv-reqd">*</span></label>
+                                                        <input type="text" class="form-control" name="nom" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="prenom">Prenom du client<span class="kv-reqd">*</span></label>
+                                                        <input type="text" class="form-control" name="prenom" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="email">Mail<span class="kv-reqd">*</span></label>
+                                                        <input type="email" class="form-control" name="email" required>
+                                                    </div>
+                                               <div class="form-group">
+                                                        <label for="telephone">Telephone:<span class="kv-reqd">*</span></label>
+                                                        <input type="tel" class="form-control" name="telephone" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="password">Mot de pass:<span class="kv-reqd">*</span></label>
+                                                        <input type="password" class="form-control" name="password" required>
+                                                    </div>
+                                                </div>
+<!--                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="code">Code client:<span class="kv-reqd">*</span></label>
+                                                        <input type="text" class="form-control" name="code" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="dateat">Date de creation:<span class="kv-reqd">*</span></label>
+                                                        <input type="date" class="form-control" name="dateat" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="dateup">Date de modification:<span class="kv-reqd">*</span></label>
+                                                        <input type="date" class="form-control" name="dateup" required>
+                                                    </div>
+                                                </div>-->
+                                            </div>
+                                            
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-info btn-sm pull-right" type="submit" >Enregistrer</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+   
+</section>
+<?php $this->assets->outputJs(); 
+

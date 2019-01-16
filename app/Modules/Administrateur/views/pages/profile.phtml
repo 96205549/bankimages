@@ -1,0 +1,60 @@
+
+<?php $this->assets->outputCss(); ?>
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mon profile</h4>
+            <form class="form form-vertical" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-sm-4 text-center">
+            <div class="kv-avatar">
+                <div class="file-loading">
+                    <input id="avatar-1" name="avatar-1" type="file" required>
+                </div>
+            </div>
+            <div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>
+        </div>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="email">Email Address<span class="kv-reqd">*</span></label>
+                <input type="email" class="form-control" name="email" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="pwd">Password<span class="kv-reqd">*</span></label>
+                <input type="password" class="form-control" name="pwd" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" name="fname" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" name="lname" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <hr>
+            <div class="text-right"> 
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</form>
+<div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
+        </div>
+    </div>
+</div>
+<?php $this->assets->outputJs(); ?>

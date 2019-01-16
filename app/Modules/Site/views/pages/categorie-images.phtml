@@ -1,0 +1,61 @@
+<?php
+//$this->assets->outputCss(); 
+if (!isset($page)) {
+$page = [];
+}
+
+?>
+<!--<section class="well center">-->
+<div class="clearfix">&nbsp;</div>
+    <div class="container-fluid">
+    <!--<div class="container-fluid">-->
+
+        <div class="row">
+            <?php
+            $i=0;
+            foreach ($page->items as $key=>$categorie):
+                
+//            $image = afriquestock_image::findFirst(["idcategorie=?0 and taille=?1  order by id desc", "bind" => ["0" => $categorie->idCat, "1" => "petite"]]);
+            $image = images::findFirst(["idcategorie=?0  order by idimage desc", "bind" => ["0" => $categorie->idCat]]);
+
+            if ($image == true):
+                $i++;
+            ?>
+                <?= ($i%6==0) ? "<div class='row'>": "";  ?>
+<!--            <div class="grid_3 wow fadeInLeft">
+                <a href="<?php// $this->url->get("images/categorie?id=" . $categorie->idCat); ?>"><img src="<?php //echo $this->url->getBaseUri() . "public/images/photo/" . $image->affiche; ?>"  width="100%" height="100%" alt=""></a>
+                <h3>
+                    <?php// $categorie->nomCategorie ?>
+                </h3>
+            </div>-->
+            <?php if($image->width >230){ ?>
+            <div class="col-md-4 wow fadeInLeft">
+                <a href="<?= $this->url->get("images/categorie?id=" . $categorie->idCat); ?>"><img src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $image->affiche; ?>" style="height:251px;" alt=""></a>
+                <h5>
+                    <?= $categorie->nomCategorie ?>
+                </h5>
+            </div>
+            <?php }else{;?>
+            <div class="col-md-2 wow fadeInLeft">
+                <a href="<?= $this->url->get("images/categorie?id=" . $categorie->idCat); ?>"><img src="<?php echo $this->url->getBaseUri() . "public/images/photo/" . $image->affiche; ?>" style="height:251px;" alt=""></a>
+                <h5>
+                    <?= $categorie->nomCategorie ?>
+                </h5>
+            </div>
+            <?php } ?>
+           
+            
+           <?= ($i%6==0) ? " </div>": ""; ?>
+            <?php
+            
+                endif;
+            endforeach;
+            ?>
+            
+            
+        <!--</div>-->
+       
+    </div>
+<!--</section>-->
+<div class="clearfix">&nbsp;</div>
+

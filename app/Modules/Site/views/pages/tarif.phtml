@@ -1,0 +1,88 @@
+<?php
+if (!isset($formules)) {
+    $formules = [];
+}
+//if (!isset($packs)) {
+//    $packs = [];
+//}
+?>
+<div class="container abon-titre">
+    <h2 align="center">Choisissez la formule qui vous convient </h2>
+</div>
+
+<!--container abonnement-->   
+<div class="container tarif-abonn">
+
+    <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+        <?php echo $this->flashSession->output() ?>
+        <div class="col-md-12 row notification alert fade in alert-dismissable" >
+            <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+            <p><?php echo $this->flashSession->output() ?></p>
+        </div>
+    <?php endif; ?>
+
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+
+        <?php
+        $i = 0;
+        foreach ($formules as $key => $formule):
+            $i++;
+            if (sizeof($formule->getPack(["idformule=:val:", "bind" => ["val" => $formule->id]])) > 0):
+                ?>
+
+                <form method="post" action="<?= $this->url->get("abonnement/souscrire") ?>">
+                    <div class="col-md-3 col-md-offset-1" style="padding: 4px; height: 400px;">
+                        <div style="background: #ccc;">
+                            <div class="card" style="width: 18rem; height: 338px; background: #fff; border: solid 1px;">
+                                <div class="card-header" style="background: #ad72ad; color: #fff; padding: 8px;">
+                                    <h4> <?= $formule->libelle ?></h4>
+                                    <?php //  $formule->description ?>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <?php foreach ($formule->getPack(["idformule=:val:", "bind" => ["val" => $formule->id]]) as $pack): ?>
+                                        <li class="list-group-item">
+                                            <label class="text-black">
+                                                <input type="radio" class="radio-inline" name="pack" value="<?= $pack->id ?>">&nbsp;<?= $pack->libelle ?>&nbsp;
+                                                <?= $pack->prix . "$ / " . $pack->periode->taux ?>
+                                            </label>
+                                        </li>
+
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+
+                            <div class="block-footer" style="background:  #f3c17a;">
+                                <button type="submit" class="btn btn-tarif btn-sm" style="width:100%" role="button">Acheter</button>
+                                <input type="hidden" value="<?= $formule->id ?>" name="formule">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+                <?php
+//            if ($i % 3 == 0) {
+                ?>
+                <!--<div class="clearfix">&nbsp;</div>-->
+                <?php
+//            }
+            endif;
+            ?>
+            <!--<div class="col-md-offset-1">&nbsp;</div>-->
+            <?php
+        endforeach;
+        ?>
+
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="container abon-footer">
+        <p align="center">Besoin D’une Offre Sur-Mesure Pour Votre Équipe Ou Votre Entreprise?</p>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+</div>

@@ -1,0 +1,86 @@
+<?php
+$this->assets->outputCss();
+if (!isset($categories)) {
+    $categories = [];
+}
+?>
+<div class="row">
+    <section class="wrapper">
+
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Ajouter une categorie 
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div>&nbsp;</div>
+                        <form class="form-inline" method="post" action="<?= $this->url->get("admin/categorie/vue") ?>">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="categorie" class="sr-only "><i class="fa fa-plus"></i>&nbsp;Cat&eacute;gorie</label>
+                                <input type="text" class="form-control" id="categorie" name="categorie" placeholder="categorie" required="">
+                            </div>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input"  checked='checked' name="statut" value="1">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                            <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>&nbsp;
+                            <a href="<?= $this->url->get("admin/categorie/") ?>" class="btn btn-default mb-2 fa fa-backward">&nbsp;Retour</a>
+                            <input type="hidden" class="form-control" id="parent" name="parent" value="<?= $parent ?>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--div class="clearfix">&nbsp;</div-->
+            <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+                <div class="col-md-12 row notification alert fade in alert-dismissable" >
+                    <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+                    <p><?php $this->flashSession->output() ?></p>
+                </div>
+            <?php endif; ?>
+            <div class="clearfix">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Cat&eacute;gorie</th>
+                                <th scope="col">Sous cat&eacute;gorie</th>
+                                <th scope="col">Voir</th>
+                                <th scope="col">Date cr&eacute;ation</th>
+                                <th scope="col">Date modification</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($categories as $key => $categorie):
+                                $sousCat = categorie::find(["parent=:val:", "bind" => ["val" => $categorie->id]]);
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $key + 1 ?></th>
+                                    <td><?= $categorie->nomCategorie ?></td>
+                                    <td><?= sizeof($sousCat); ?></td>
+                                    <td><a href="<?= $this->url->get("categorie/vue?AFID=" . $categorie->id); ?>" class="fa fa-eye text-primary"></a></td>
+                                    <td><?= $categorie->dateat ?></td>
+                                    <td><?= $categorie->dateup ?></td>
+                                    <td>
+                                        <a href="#" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                        <a href="#" class="fa fa-trash text-danger"></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,71 @@
+ <?php 
+  $this->assets->outputCss(); 
+  if (!isset($abonnements)) {
+    $abonnements = [];
+   }
+  if (!isset($types)) {
+    $types = [];
+   }
+  if (!isset($packs)) {
+    $packs = [];
+   }
+  if (!isset($periodes)) {
+    $periodes = [];
+   }
+  if (!isset($clients)) {
+    $clients = [];
+   }
+
+ if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div class="col-md-12 row notification alert fade in alert-dismissable" >
+                <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+                <p>//<?php $this->flashSession->output() ?></p>
+            </div>
+        <?php endif; ?>
+
+ <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>                            
+                            <th>Date de debut</th>
+                            <th>Date de fin</th>
+                            <th>Type</th>
+                            <th>Pack</th>
+                            <th>Periode</th>
+                            <th>Client</th>
+                            <th>Prix</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($abonnements as $abonnement):                            
+                            ?>
+                            <tr>
+                                
+                                <td><?= $abonnement->datedeb ?></td>
+                                <td><?= $abonnement->datefin ?></td>
+                                <td><?= $abonnement->type_id ?></td>
+                                <td><?= $abonnement->pack_id ?></td>
+                                <td><?= $abonnement->periode_id ?></td>
+                                <td><?= $abonnement->client_id ?></td>
+                                
+                                <td><?= $abonnement->prix ?></td>
+
+                                <td>
+                                    <a href="<?= $this->url->get("admin/abonnement/update?AFID=".$abonnement->id); ?>" class="fa fa-pencil-square text-warning"></a>&nbsp;
+                                    <a href="<?= $this->url->get("admin/abonnement/delete?AFID=".$abonnement->id); ?>" class="fa fa-trash text-danger"></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+<?php $this->assets->outputJs(); ?>

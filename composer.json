@@ -1,0 +1,13 @@
+{
+    "name": "php_webdev/joemvc",
+    "description": "chargement des package",
+    "authors": [
+        {
+            "name": "Joefree",
+            "email": "bouraimajoezer@gmail.com"
+        }
+    ],
+    "require": {
+        "fedapay/fedapay-php": "^0.1.8"
+    }
+}

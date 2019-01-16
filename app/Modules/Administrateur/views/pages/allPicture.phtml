@@ -1,0 +1,59 @@
+<?php
+
+if (!isset($images)) {
+    $images = [];
+}
+?>
+
+<div class="clearfix">&nbsp;</div>
+<?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+        <div class="col-md-12 row notification alert fade in alert-dismissable" >
+            <a href="#" class="close" data-dismiss="alert" arial-label="close" titre="close">x</a>
+            <p><?php $this->flashSession->output() ?></p>
+        </div>
+    <?php endif; ?>
+<div class="clearfix">&nbsp;</div>
+<div class="container">
+        <table id="example" class="table table-responsive table-bordered table-st" >
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Description</th>
+                    <th>Categorie</th>
+                    <th>Mot cle</th>
+                    <th>Prix</th>
+                    <th>Photographe</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 13px;">
+                <?php foreach ($images as $image): ?>
+                    <tr>
+                        <td><img src="<?= $this->url->getBaseUri() . "public/images/photo/" . $image->signature ?>" width="45"  class=""></td>
+                        <td><?= $image->description ?></td>
+                        <td><?= $image->categorie->nomcategorie ?></td>
+                        <td><p><?= $image->motcle ?></p></td>
+                        <td><?= $image->prixG . " $" ?></td>
+                        <td><?= $image->client->nom; //photographe ?></td>
+                        <td>
+                            <a href="upPicture?id=<?= $image->idimage ?>"><i class="fa fa-pencil text-warning"></i></a>
+                            <a href="delPicture?id=<?= $image->idimage ?>" data-confirm="<?= $image->nom ?>"><i class="fa fa-remove text-danger"></i></a>
+                            <!--<a href="#"><i class="fa fa-chevron-circle-down text-danger"></i></a>-->
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Photo</th>
+                    <th>Description</th>
+                    <th>Categorie</th>
+                    <th>Mot cle</th>
+                    <th>Prix</th>
+                    <th>Photographe</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+<div class="clearfix">&nbsp;</div>
